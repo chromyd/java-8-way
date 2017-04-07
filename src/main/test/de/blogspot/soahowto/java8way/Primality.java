@@ -13,8 +13,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-//import
-
 @RunWith(Parameterized.class)
 public class Primality {
 
