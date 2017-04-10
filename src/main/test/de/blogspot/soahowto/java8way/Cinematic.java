@@ -1,5 +1,6 @@
 package de.blogspot.soahowto.java8way;
 
+import static java.util.Comparator.comparing;
 import static java.util.Comparator.nullsLast;
 import static java.util.Comparator.reverseOrder;
 
@@ -7,8 +8,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import org.junit.Before;
@@ -26,6 +27,16 @@ public class Cinematic {
 
     private List<Movie> movies;
 
+    private final Consumer<Movie> show_ranked = new Consumer<Movie>() {
+
+        private int rank = 0;
+
+        @Override
+        public void accept(Movie t) {
+            System.out.printf("%3d. %s\n", ++rank, t);
+        }
+    };
+
     @Before
     public void setup() throws IOException {
         movies = Files.lines(PATH).map(s -> gson.fromJson(s, Movie.class)).collect(Collectors.toList());
@@ -39,8 +50,23 @@ public class Cinematic {
 
     @Test
     public void chartByMetacritic() {
-        movies.sort(Comparator.comparing(m -> m.getMetacriticScore().orElse(null), nullsLast(reverseOrder())));
+        movies.sort(comparing(m -> m.getMetacriticScore().orElse(null), nullsLast(reverseOrder())));
         movies.stream().forEach(System.out::println);
+    }
+
+    @Test
+    public void chartByRotten() {
+        movies.sort(comparing(m -> m.getRottenScore().orElse(null), nullsLast(reverseOrder())));
+        movies.stream().forEach(show_ranked);
+    }
+
+    @Test
+    public void chartByRottenThenImdb() {
+        movies.stream()
+                .sorted(comparing((Movie m) -> m.getRottenScore().orElse(null), nullsLast(reverseOrder()))
+                        .thenComparing(Movie::getImdbRating, reverseOrder()))
+                .forEach(show_ranked);
+
     }
 
     @Test

@@ -66,8 +66,6 @@ public class FastPrimality {
 
     private Iterable<Long> range;
 
-    private long input;
-
     @Test
     public void correct() {
         for (long input : range) {
