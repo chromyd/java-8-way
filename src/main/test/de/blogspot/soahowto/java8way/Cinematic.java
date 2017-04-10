@@ -55,7 +55,7 @@ public class Cinematic {
     }
 
     @Test
-    public void chartByRotten() {
+    public void chartByRottenTomatoes() {
         movies.sort(comparing(m -> m.getRottenScore().orElse(null), nullsLast(reverseOrder())));
         movies.stream().forEach(show_ranked);
     }

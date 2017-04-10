@@ -30,7 +30,7 @@ public class FastPrimality {
 
         @Override
         public String toString() {
-            return "[" + from + "-" + to + ")";
+            return String.format("range <%,d - %,d)", from, to);
         }
 
         @Override
@@ -79,8 +79,17 @@ public class FastPrimality {
             return n == 2;
 
         return n % 2 != 0 &&
-                LongStream.iterate(3L, i -> i + 2)
+                LongStream.iterate(3, i -> i + 2)
                         .limit(Math.round(Math.sqrt(n) / 2) - 1)
+                        //.peek(c -> System.out.printf("Peeking at %d with %d\n", c, n))
+                        .noneMatch(c -> n % c == 0);
+    }
+
+    public static boolean isPrime2(long n) {
+
+        return n > 1 &&
+                LongStream.range(2, n - 1)
+                        //.limit(Math.round(Math.sqrt(n) / 2) - 1)
                         //.peek(c -> System.out.printf("Peeking at %d with %d\n", c, n))
                         .noneMatch(c -> n % c == 0);
     }
