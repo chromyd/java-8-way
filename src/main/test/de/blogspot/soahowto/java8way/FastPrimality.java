@@ -73,6 +73,13 @@ public class FastPrimality {
         }
     }
 
+    @Test
+    public void correctTrust() {
+        for (long input : range) {
+            assertThat(!isAlmostCertainPrime(input)).as("Checking %d", input).isNotNull();
+        }
+    }
+
     public static boolean isPrime(long n) {
 
         if (n <= 2)

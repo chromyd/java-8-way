@@ -27,7 +27,7 @@ public class FunctionalInterfaces {
 
     @Test
     public void anotherCustom() {
-        Timer.runTimed(() -> System.out.println(Primes.isPrime(42)));
+        Timer.runTimed(() -> System.out.println(Primes.isPrime(Integer.MAX_VALUE - 6)));
     }
 
     @FunctionalInterface

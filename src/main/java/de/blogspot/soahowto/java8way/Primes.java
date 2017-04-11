@@ -16,7 +16,7 @@ public class Primes {
         return n % 2 != 0 &&
                 LongStream.iterate(3L, i -> i + 2)
                         .limit(Math.round(Math.sqrt(n) / 2) - 1)
-                        //.peek(c -> System.out.printf("Peeking at %d with %d\n", c, n))
+                        .peek(c -> System.out.printf("Peeking at %d with %d\n", c, n))
                         .noneMatch(c -> n % c == 0);
     }
 
