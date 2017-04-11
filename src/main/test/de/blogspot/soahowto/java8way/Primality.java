@@ -19,7 +19,7 @@ public class Primality {
     @Parameters
     public static List<Long> data()
     {
-        return LongStream.range(0L, 500_000L).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+        return LongStream.range(0, 50_000).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
     }
 
     public Primality(long input) {

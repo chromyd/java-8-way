@@ -1,14 +1,16 @@
 package de.blogspot.soahowto.java8way;
 
-//import static de.blogspot.soahowto.java8way.Primes.isProbablePrime;
+import static de.blogspot.soahowto.java8way.Primes.isAlmostCertainPrime;
+import static de.blogspot.soahowto.java8way.Primes.isPrime;
+import static de.blogspot.soahowto.java8way.Primes.isProbablePrime;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.LongStream;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -74,38 +76,11 @@ public class FastPrimality {
     }
 
     @Test
+    @Ignore
     public void correctTrust() {
         for (long input : range) {
             assertThat(!isAlmostCertainPrime(input)).as("Checking %d", input).isNotNull();
         }
     }
 
-    public static boolean isPrime(long n) {
-
-        if (n <= 2)
-            return n == 2;
-
-        return n % 2 != 0 &&
-                LongStream.iterate(3, i -> i + 2)
-                        .limit(Math.round(Math.sqrt(n) / 2) - 1)
-                        //.peek(c -> System.out.printf("Peeking at %d with %d\n", c, n))
-                        .noneMatch(c -> n % c == 0);
-    }
-
-    public static boolean isPrime2(long n) {
-
-        return n > 1 &&
-                LongStream.range(2, n - 1)
-                        //.limit(Math.round(Math.sqrt(n) / 2) - 1)
-                        //.peek(c -> System.out.printf("Peeking at %d with %d\n", c, n))
-                        .noneMatch(c -> n % c == 0);
-    }
-
-    public static boolean isAlmostCertainPrime(long n) {
-        return BigInteger.valueOf(n).isProbablePrime(Integer.MAX_VALUE);
-    }
-
-    public static boolean isProbablePrime(long n, int certainty) {
-        return BigInteger.valueOf(n).isProbablePrime(certainty);
-    }
 }
