@@ -30,12 +30,21 @@ public class FunctionalInterfaces {
     }
 
     @Test
-    public void anotherCustom() {
+    public void checkMaxPrime() {
+        Timer.runTimed(() -> System.out.println(Primes.isPrime(MAX_PRIME)));
+    }
+
+    @Test
+    public void checkMaxPrimeFaster() {
+        Timer.runTimed(() -> System.out.println(Primes.isPrimeFast(MAX_PRIME)));
+    }
+
+    @Test
+    public void checkMaxPrimeFastest() {
         Timer.runTimed(() -> System.out.println(Primes.isAlmostCertainPrime(MAX_PRIME)));
     }
 
     @Test
-    //@Ignore
     public void findMaximumPrime() {
         Timer.runTimed(() -> showMe(maxLongPrime()));
     }
@@ -46,7 +55,10 @@ public class FunctionalInterfaces {
     }
 
     private long maxLongPrime() {
-        return LongStream.iterate(Long.MAX_VALUE, n -> n - 2).filter(Primes::isPrime).findFirst().getAsLong();
+        return LongStream.iterate(Long.MAX_VALUE, n -> n - 2)
+                .filter(Primes::isAlmostCertainPrime)
+                .findFirst()
+                .getAsLong();
     }
 
     @FunctionalInterface

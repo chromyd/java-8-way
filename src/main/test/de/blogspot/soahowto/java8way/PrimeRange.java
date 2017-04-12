@@ -24,7 +24,8 @@ public class PrimeRange {
         return Arrays.asList(
                 new Tuple3<>(0L, 1_000_000L, 78_498L),
                 new Tuple3<>(1_000_001L, 2_000_000L, 70_435L),
-                new Tuple3<>(2_000_001L, 3_000_000L, 67_883L)
+                new Tuple3<>(2_000_001L, 3_000_000L, 67_883L),
+                new Tuple3<>(100_000_001L, 101_000_000L, 54_208L)
                 );
     }
 

@@ -32,4 +32,62 @@ public class DefaultMethods {
 
     }
 
+    @Test
+    public void classesOverInterfaces() {
+        assertThat(new C().foo()).isEqualTo("B");
+    }
+
+    @Test
+    public void specificOverGeneric() {
+        assertThat(new I().foo()).isEqualTo("H");
+    }
+
+    public static interface A {
+        default String foo() {
+            return "A";
+        }
+    }
+
+    public static class B {
+        public String foo() {
+            return "B";
+        }
+    }
+
+    public static class C extends B implements A {
+    }
+
+    public static interface D {
+        default String foo() {
+            return "D";
+        }
+    }
+
+    public static interface E {
+        default String foo() {
+            return "E";
+        }
+    }
+
+    public static class F implements D, E {
+        public String foo() {
+            return D.super.foo();
+        }
+    }
+
+    public static interface G {
+        default String foo() {
+            return "G";
+        }
+    }
+
+    public static interface H extends G {
+        default String foo() {
+            return "H";
+        }
+    }
+
+    public static class I implements G, H {
+    }
+
 }

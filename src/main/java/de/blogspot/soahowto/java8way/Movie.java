@@ -290,7 +290,7 @@ public class Movie {
     }
 
     public String allRatings() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (Rating r : ratings) {
             sb.append(r.getSource() + ":" + r.getValue() + "|");
         }
