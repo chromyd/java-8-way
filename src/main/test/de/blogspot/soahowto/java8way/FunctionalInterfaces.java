@@ -50,7 +50,7 @@ public class FunctionalInterfaces {
     }
 
     private void showMe(long maxLongPrime) {
-        System.out.printf("Max long prime is %,d, with distance %,d from MAX_VALUE\n", maxLongPrime, Long.MAX_VALUE
+        System.out.printf("Max long prime is %,d at distance %,d from Long.MAX_VALUE\n", maxLongPrime, Long.MAX_VALUE
                 - maxLongPrime);
     }
 

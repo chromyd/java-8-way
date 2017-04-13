@@ -13,7 +13,6 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.gson.Gson;
@@ -51,7 +50,7 @@ public class Cinematic {
     @Test
     public void chartByMetacritic() {
         movies.sort(comparing(m -> m.getMetacriticScore().orElse(null), nullsLast(reverseOrder())));
-        movies.stream().forEach(System.out::println);
+        movies.stream().forEach(show_ranked);
     }
 
     @Test
@@ -68,41 +67,4 @@ public class Cinematic {
                 .forEach(show_ranked);
 
     }
-
-    @Test
-    @Ignore
-    public void fiddlingWithGson() {
-        Gson g = new Gson();
-
-        Person person = g.fromJson("{\"name\": \"John\"}", Person.class);
-        System.out.println(person.getName()); //John
-
-        System.out.println(g.toJson(person)); // {"name":"John"}
-    }
-
-    @Test
-    @Ignore
-    public void fiddlingWithGsonMovie() throws IOException {
-        Gson g = new Gson();
-
-        Movie m = g.fromJson("{\"Title\": \"Fun with me\", \"year\": \"2017\"}".toLowerCase(), Movie.class);
-        System.out.println(m);
-
-        System.out.println(g.toJson(m));
-    }
-
-    @Test
-    @Ignore
-    public void fiddlingWithGsonTrueMovie() throws IOException {
-        String movieString = Files.lines(PATH).limit(1).findAny().get();
-        System.out.println(movieString);
-
-        Gson g = new Gson();
-
-        Movie m = g.fromJson(movieString.toLowerCase(), Movie.class);
-        System.out.println(m);
-
-        System.out.println(g.toJson(m));
-    }
-
 }

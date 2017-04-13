@@ -59,7 +59,7 @@ public class Cinema3D {
         //.peek(System.out::println)
         System.out.println(movies.stream()
                 .map(Movie::getActors)
-                .flatMap(Pattern.compile(", *")::splitAsStream)
+                .flatMap(Pattern.compile(", ")::splitAsStream)
                 .collect(Collectors.groupingBy(s -> s, Collectors.counting())));
     }
 
@@ -67,7 +67,7 @@ public class Cinema3D {
     public void findTopTenActors() {
         Map<String, Long> actorAppearances = movies.stream()
                 .map(Movie::getActors)
-                .flatMap(Pattern.compile(", *")::splitAsStream)
+                .flatMap(Pattern.compile(", ")::splitAsStream)
                 .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
 
         actorAppearances.entrySet().stream()

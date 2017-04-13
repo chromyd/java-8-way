@@ -9,12 +9,28 @@ public class OptionalMagic {
 
     private PersonDao personDao = new PersonDao();
 
-    private Person nullPerson = null;
+    private Person person = personDao.findPersonBySsn(1).get();
 
-    private Person aPerson = personDao.findPersonBySsn(1).get();
+    @Test(expected = NullPointerException.class)
+    public void sinCity() {
+        person.getResidence().getAddress().getCity();
+    }
+
+    @Test
+    public void sinCity_A_DameToKillFor() {
+        if (person != null) {
+            Residence residence = person.getResidence();
+            if (residence != null) {
+                Address address = residence.getAddress();
+                if (address != null) {
+                    address.getCity();
+                }
+            }
+        }
+    }
 
     @Test(expected = NotFoundException.class)
-    public void getCity() {
+    public void cityOfGod() {
         personDao.findPersonBySsn(1)
                 .map(Person::getResidence)
                 .map(Residence::getAddress)
@@ -61,6 +77,14 @@ public class OptionalMagic {
         }
 
         private int ssn;
+
+        public int getSsn() {
+            return ssn;
+        }
+
+        public void setSsn(int ssn) {
+            this.ssn = ssn;
+        }
 
         private String firstName;
 
