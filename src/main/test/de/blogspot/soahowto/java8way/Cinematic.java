@@ -26,16 +26,6 @@ public class Cinematic {
 
     private List<Movie> movies;
 
-    private final Consumer<Movie> show_ranked = new Consumer<Movie>() {
-
-        private int rank = 0;
-
-        @Override
-        public void accept(Movie t) {
-            System.out.printf("%3d. %s\n", ++rank, t);
-        }
-    };
-
     @Before
     public void setup() throws IOException {
         movies = Files.lines(PATH).map(s -> gson.fromJson(s, Movie.class)).collect(Collectors.toList());
@@ -67,4 +57,15 @@ public class Cinematic {
                 .forEach(show_ranked);
 
     }
+
+    private final Consumer<Movie> show_ranked = new Consumer<Movie>() {
+
+        private int rank = 0;
+
+        @Override
+        public void accept(Movie t) {
+            System.out.printf("%3d. %s\n", ++rank, t);
+        }
+    };
+
 }

@@ -52,6 +52,8 @@ public class DefaultMethods {
 
     public static class I implements G, H {
 
+        // spoiler-alert
+
         public String foo() {
             return H.super.foo();
         }

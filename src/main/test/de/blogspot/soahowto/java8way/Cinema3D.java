@@ -108,9 +108,9 @@ public class Cinema3D {
 
     private void findTop(int n, Function<Movie, String> attributeSelector) {
         Map<String, Long> attributeCounts = movies.stream()
-                //.peek(m -> System.out.println("B:" + m.getWriter()))
+                .peek(m -> System.out.println("B:" + m.getWriter()))
                 .map(attributeSelector)
-                //.peek(m -> System.out.println("A:" + m))
+                .peek(m -> System.out.println("A:" + m))
                 .flatMap(s -> Pattern.compile(", *").splitAsStream(s).distinct())
                 .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
 
