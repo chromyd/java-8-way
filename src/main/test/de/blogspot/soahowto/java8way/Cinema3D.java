@@ -8,7 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
@@ -31,13 +30,11 @@ public class Cinema3D {
 
     private Gson gson = new Gson();
 
-    private List<Movie> movies = new ArrayList<>();
+    private List<Movie> movies;
 
     @Before
     public void setup() throws IOException {
-        for (String s : Files.readAllLines(PATH)) {
-            movies.add(gson.fromJson(s, Movie.class));
-        }
+        movies = Files.lines(PATH).map(s -> gson.fromJson(s, Movie.class)).collect(Collectors.toList());
     }
 
     @Test
