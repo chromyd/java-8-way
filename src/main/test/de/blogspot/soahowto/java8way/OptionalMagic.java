@@ -38,6 +38,15 @@ public class OptionalMagic {
                 .orElseThrow(NotFoundException::new);
     }
 
+    @Test(expected = NotFoundException.class)
+    public void cityOfGod_10YearsLater() {
+        personDao.findPersonBySsn(1)
+                .map(Person::getResidence)
+                .map(Residence::getAddress)
+                .map(Address::getCity)
+                .ifPresentOrElse(System.out::println, () -> { throw new NotFoundException(); });
+    }
+
     @SuppressWarnings("serial")
     public static class NotFoundException extends RuntimeException {
     }
