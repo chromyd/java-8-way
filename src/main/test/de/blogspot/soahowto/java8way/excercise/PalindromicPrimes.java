@@ -17,17 +17,15 @@ public class PalindromicPrimes {
         Stream.iterate(BigInteger.valueOf(2), BigInteger::nextProbablePrime)
                 .map(Object::toString)
                 .filter(s -> s.equals(new StringBuilder(s).reverse().toString()))
-                .limit(20)
+                .limit(100)
                 .forEach(System.out::println);
     }
 
     @Test
     public void base2() {
         Stream.iterate(BigInteger.valueOf(2), BigInteger::nextProbablePrime)
-                //.map(i -> i.toString(2))
                 .filter(i -> i.toString(2).equals(new StringBuilder(i.toString(2)).reverse().toString()))
-                .limit(200)
-                //.forEach(System.out::println);
+                .limit(100)
                 .forEach(i -> System.out.println(i + " (" + i.toString(2) + ")"));
     }
 
@@ -36,12 +34,6 @@ public class PalindromicPrimes {
         List<Integer> digits = new ArrayList<>();
         digits.add(0);
         Stream.iterate(BigInteger.valueOf(2), BigInteger::nextProbablePrime)
-                .peek(p -> {
-                    if (p.toString().length() > digits.get(0)) {
-                        System.out.println("Looking at " + p);
-                        digits.set(0, p.toString().length());
-                    }
-                })
                 .filter(i -> i.toString().equals(new StringBuilder(i.toString()).reverse().toString()))
                 .filter(i -> i.toString(2).equals(new StringBuilder(i.toString(2)).reverse().toString()))
                 .limit(4)
