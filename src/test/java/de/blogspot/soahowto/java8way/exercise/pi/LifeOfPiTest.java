@@ -1,15 +1,15 @@
 package de.blogspot.soahowto.java8way.exercise.pi;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.util.stream.Collectors;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LifeOfPiTest {
 
-    private static final String PI = "3.1415926535897932384";
+    private static final String PI = "3.14159265358979323846";
 
     private LifeOfPi lifeOfPi = new LifeOfPi();
 
