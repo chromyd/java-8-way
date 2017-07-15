@@ -39,30 +39,18 @@ public class LifeOfPi {
     }
 
     private void analyze() {
-        Instant start = Instant.now();
-        int accuracy = 0;
         for (long iterations = 1000; true; iterations *= 2) {
+            Instant start = Instant.now();
             String pi = finalSequence().limit(iterations).reduce(THREE, BigDecimal::add).setScale(25, RoundingMode.HALF_UP).toString().substring(2);
-            int newAccuracy = 0;
-            while (pi.startsWith(PI.substring(0, newAccuracy))) {
-                ++newAccuracy;
+            int accuracy = 0;
+            while (pi.startsWith(PI.substring(0, ++accuracy))) {
             }
-            --newAccuracy;
-            if (newAccuracy == accuracy) {
-                continue;
-            }
-            if (newAccuracy < accuracy) {
-                System.out.println("WHOA!! IT DID HAPPEN!!!!!!!!!!!!!! AT ITERATION COUNT: " + iterations);
-            }
-            if (newAccuracy > accuracy) {
-                accuracy = newAccuracy;
-                System.out.printf("Iterations: %,9d Accuracy: %2d\n", iterations, accuracy);
-            }
+            --accuracy;
+            System.out.printf("Iterations: %,11d Accuracy: %2d (in %s)\n", iterations, accuracy, Duration.between(start, Instant.now()).toString().substring(2).toLowerCase());
             if (accuracy >= 25) {
                 break;
             }
         }
-        System.out.println("All done in: " + (Duration.between(start, Instant.now())));
     }
 
 }
